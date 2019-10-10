@@ -35,14 +35,14 @@ Methodology
 
 ``dike`` attempts to generate several metrics that might help capture the measure of representativeness/suitability of each embedding to your text data:
 
-* Vocabulary-based:
+* **Vocabulary-based:**
 
   * The simple intersection between your data's vocabulary and that of the examined word embedding.
   * Vocabulary intersection weighted by word importance in your data; word importance can be given by various measures.
   * Count of missing word occurences.
   * Count of documents with at least 1/2/etc. missing words.
 
-* Information content: Each document is projected into the embedding space by averaging the word vectors of the words it is composed off. Then, for each resulting projection of the entire corpus into the embedding space, the information content is estimated by presenting the number of dimension required by PCA to capture increasing thresholds of the information in the resulting space.
+* **Information content:** Each document is projected into the embedding space by averaging the word vectors of the words it is composed off. Then, for each resulting projection of the entire corpus into the embedding space, the information content is estimated by presenting the number of dimension required by PCA to capture increasing thresholds of the information in the resulting space.
 
 
 Use
