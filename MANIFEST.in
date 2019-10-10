@@ -1,0 +1,2 @@
+include versioneer.py
+include dike/_version.py
