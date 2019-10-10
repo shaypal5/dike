@@ -70,7 +70,7 @@ Corresponding environment variables which can be used for configuration:
 Contributing
 ============
 
-Package author and current maintainer is `Shay Palachy <http://www.shaypalachy.com/>`_; You are more than welcome to approach him for help. Contributions are very welcomed.
+Package author and current maintainer is `Shay Palachy <http://www.shaypalachy.com/>`_ (shay.palachy@gmail.com); You are more than welcome to approach him for help. Contributions are very welcomed.
 
 Installing for development
 ----------------------------
@@ -117,7 +117,7 @@ Credits
 
 Created by `Shay Palachy <http://www.shaypalachy.com/>`_ (shay.palachy@gmail.com).
 
-``dike`` is named after `Dike, the Greek goddess of justice <https://en.wikipedia.org/wiki/Dike_(mythology)>`_, as she is meant to help you make the right choice. The symbol ᘯ was chosen for its visual similarity to the Libra symbol, the constellation representing Dike.
+``dike`` is named after `Dike, the Greek goddess of justice <https://en.wikipedia.org/wiki/Dike_(mythology)>`_, as she is meant to help you make the right choice of pre-trained word embeddings. The symbol ᘯ was chosen for its visual similarity to the Libra symbol, the constellation representing Dike.
 
 
 .. |PyPI-Status| image:: https://img.shields.io/pypi/v/dike.svg
