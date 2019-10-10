@@ -1,9 +1,9 @@
 dike ᘯ
 #######
 
-|PyPI-Status| |Downloads| |PyPI-Versions| |Build-Status| |Codecov| |Codefactor| |LICENCE|
+.. |PyPI-Status| |Downloads| |PyPI-Versions| |Build-Status| |Codecov| |Codefactor| |LICENCE|
 
-Simple hierarchical configuration for Python packages.
+Dike helps you select pre-trained word embedding for your data.
 
 .. |dike_icon| image:: https://github.com/shaypal5/dike/blob/cc5595bbb78f784a3174a07157083f755fc93172/dike.png
    :height: 87
@@ -14,11 +14,8 @@ Simple hierarchical configuration for Python packages.
 
 .. code-block:: python
 
-  from dike import Birch
-  cfg = Birch('mypackage')
-  # read using a single API both the MYPACKAGE_SERVER_HOSTNAME environment variable
-  # and ~/.mypackage/cfg.json containing {'server': {'port': 55}}
-  connect(cfg['SERVER__HOSTNAME'], cfg['server']['port'])
+  from dike import select_embedding
+  select_embedding(df['description'])
 
 .. contents::
 
@@ -33,152 +30,9 @@ Installation
   pip install dike
 
 
-Features
-========
-
-* Supported formats: JSON, YAML.
-* Pure python.
-* Supports Python 3.5+.
-* Supported and `fully tested on Linux, OS X and Windows <https://codecov.io/github/shaypal5/dike>`_.
-* `XDG Base Directory Specification <https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html>`_ support.
-
 
 Use
 ===
-
-Basic use
----------
-
-``dike`` provides an easy way to read simple hierarchical configurations for your Python package or application from both environment variables and configuration files. 
-
-``dike`` uses namespaces to manage configuration values. The access to each namespace is done via a ``Birch`` object initialized with that namespace. Though written with a specific use case in mind, where a single package uses a single namespace to manage its configuration, any number of namespaces can be used in a single context. For example:
-
-.. code-block:: python
-
-  from dike import Birch
-  zubat_cfg = Birch('zubat')
-  golbat_cfg = Birch('golbat')
-
-
-Each namespace encompasses all values set by either environment variables starting with ``<uppercase_namespace>_``, or defined within ``cfg`` files (of a supported format) located in a set of pre-configured directories; this set defaults to the ``~/.config/<namespace>`` (as par the `XDG Base Directory Specification <https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html>`_) and the ``~/.<namespace>`` directories.
-
-For example, the ``zubat`` namespace encompasses environment variables such as ``ZUBAT_HOSTNAME`` and ``ZUBAT__PORT``, and all mappings in one of the files ``~/.config/.zubat/cfg.json`` or ``~/.zubat/cfg.json`` (if such a file exists).
-
-Once defined in such a way, the ``Birch`` object can be used to access the values of mappings of both types (with or without the namespace suffix; casing is also ignored). For example:
-
-.. code-block:: python
-
-  >>> os.environ['ZUBAT_SERVER_HOST'] = 'www.zubat.com'
-  >>> os.environ['ZUBAT_SERVER_PORT'] = '87'
-  >>> from dike import Birch
-  >>> zubat_cfg = Birch('zubat')
-  >>>> zubat_cfg['ZUBAT_SERVER_HOST']
-  'www.zubat.com'
-  >>> zubat_cfg['SERVER_PORT']
-  '87'
-  >>> zubat_cfg['server_port']
-  '87'
-
-
-The get and mget methods
-------------------------
-
-Birch objects expose two methods that allow more nuanced retreival of configuration items:
-
-The ``mget`` method allows the caller to supply a ``caster`` callable, through-which any found return value will be passed:
-
-.. code-block:: python
-
-  >>> os.environ['ZUBAT__PORT'] = '555'
-  >>> zubat_cfg = Birch('zubat')
-  >>> zubat_cfg.mget('port', int)
-  555
-
-
-The ``get`` method additionally allows you to supply a default value, which is returned if no matching configuration entry is found:
-
-.. code-block:: python
-
-  >>> import os; os.environ['ZUBAT__PORT'] = '555'
-  >>> zubat_cfg = Birch('zubat')
-  >>> zubat_cfg.get('port', default=8888, caster=int)
-  555
-  >>> zubat_cfg.get('host', default='defhost')  # Default value is returned
-  'defhost'
-  >>> zubat_cfg.get('host')  # No error is thrown, None is returned
-
-
-If no default value is provided, ``None`` is returned. To still have a ``KeyError`` raised in this case use ``throw=True`` in the function call:
-.. code-block:: python
-
-  >>> import os; os.environ['ZUBAT__PORT'] = '555'
-  >>> zubat_cfg = Birch('zubat')
-  >>> zubat_cfg.get('host', throw=True)  # An error is thrown
-  Traceback (most recent call last):
-    ...
-  KeyError: zubat: No configuration value for HOST.
-
-
-Hierarchical configuration
---------------------------
-
-``dike`` supports a simple hierarchy between configuration mappings. Hierarchy is either expressed explicitly in configuration files as nested object/entries (in the case of ``json`` and ``YAML`` files), or using ``__`` (two underscore characters) in the configuration key - both in configuration files and environment variables. Thus, the ``ZUBAT__SERVER__PORT`` environment variable is equivalent to both ``{'server': {'port': 55}}`` and ``{'server__PORT': 55}`` mappings given in a ``~/.zubat/cfg.json`` file, for example. Casing is ignored on all levels.
-
-As such, hierarchical mappings can be accessed either using ``__`` to indicate a hierarchical path, or using dict-like item access:
-
-.. code-block:: python
-
-  >>> os.environ['ZUBAT__SERVER__HOST'] = 'www.zubat.com'
-  >>> from dike import Birch
-  >>> zubat_cfg = Birch('zubat')
-  >>>> zubat_cfg['SERVER__HOST']
-  'www.zubat.com'
-  >>>> zubat_cfg['server']['HOST']
-  'www.zubat.com'
-  >>>> zubat_cfg['SERVER']['host']
-  'www.zubat.com'
-
-
-**Note that this is also true for non-hierarchical configuration file mappings**, so ``{'server__port': 55}``, even when given in this form in a configuration file, can be accessed using both ``zubat_cfg['SERVER__PORT']`` and ``zubat_cfg['SERVER']['PORT']`` (casing is still ignored on all levels).
-
-
-Resolution order
-----------------
-
-A namespace is always loaded with matching environment variables **after** the configuration file has been loaded, and corresponding mappings will thus override their file-originating counterparts; e.g. the ``ZUBAT__SERVER__PORT`` environment variable will overwrite the value of the mapping ``{'server': {'port': 55}}`` given in a ``~/.zubat/cfg.json`` file. 
-
-The lookup order of different files, while deterministic, is undefined and not part of the API. Thus, even with the ``load_all`` option set (see the `Configuring dike`_ section), ``cfg`` files with different file extensions can not be relied upon to provide private-vs-shared configuration functionality, or other such configuration modes.
-
-
-Reloading configuration
------------------------
-
-Configuration values can be reloaded from all sources - both configuration files and environment variables - by calling the ``reload`` method:
-
-.. code-block:: python
-
-  >>> os.environ['ZUBAT__SERVER__HOST'] = 'www.zubat.com'
-  >>> from dike import Birch
-  >>> zubat_cfg = Birch('zubat')
-  >>>> zubat_cfg['SERVER__HOST']
-  'www.zubat.com'
-  >>> os.environ['ZUBAT__SERVER__HOST'] = 'New.value!'
-  >>> zubat_cfg.reload()
-  >>>> zubat_cfg['server']['HOST']
-  'New.value!'
-
-You can set automatic configuration reload on every value inspection by setting ``auto_reload=True`` when initializing the ``Birch`` object:
-
-.. code-block:: python
-
-  >>> os.environ['ZUBAT__SERVER__HOST'] = 'www.zubat.com'
-  >>> from dike import Birch
-  >>> zubat_cfg = Birch('zubat', auto_reload=True)
-  >>>> zubat_cfg['SERVER__HOST']
-  'www.zubat.com'
-  >>> os.environ['ZUBAT__SERVER__HOST'] = 'New.value!'
-  >>>> zubat_cfg['server']['HOST']
-  'New.value!'
 
 
 
@@ -193,17 +47,6 @@ By default ``dike`` looks for files only in the ``~/.config/<namespace>`` and ``
 Similarly, be default ``dike`` reads into the configuration tree only the first compliant file encountered during a lookup in all pre-configured directories; to instead load hierarchical configurations from all such files instead, the ``load_all`` constructor parameter can be set to ``True``. Again, load order is undefined, and thus so is the resulting hierarchical configuration.
 
 
-File formats
-------------
-
-By default, ``dike`` will only try to read ``cfg.json`` files. To dictate a different set of supported formats, populate the ``supported_formats`` constructor parameter with the desired formats. 
-
-For example, ``Birch('zubat', supported_formats=['json', 'yaml'])`` will read both ``cfg.json`` and ``cfg.yaml`` files, while ``Birch('golbat', supported_formats='yaml')`` will ony read ``cfg.yaml`` (and ``cfg.yml``) files.
-
-Currently supported formats are:
-
-* ``JSON`` - Looks for ``cfg.json`` files.
-* ``YAML`` - Looks for ``cfg.yaml`` and ``cfg.yml`` files.
 
 
 Contributing
@@ -255,6 +98,8 @@ Credits
 =======
 
 Created by `Shay Palachy <http://www.shaypalachy.com/>`_ (shay.palachy@gmail.com).
+
+``dike`` is named after `Dike, the Greek goddess of justice <https://en.wikipedia.org/wiki/Dike_(mythology)>`_, as she is meant to help you make the right choice. The symbol ᘯ was chosen for its visual similarity to the Libra symbol, the constellation representing Dike.
 
 
 .. |PyPI-Status| image:: https://img.shields.io/pypi/v/dike.svg
