@@ -61,6 +61,10 @@ Configure ``dike`` by populating the ``~/.config/dike/cfg.json`` file with the f
       "datadir": "/home/myuser/data/"  # directory where data and embedding files are downloaded to
   }
 
+Corresponding environment variables which can be used for configuration:
+
+* ``DIKE_DATADIR`` - Populate with the path to the directory where data and embedding files are downloaded to.
+
 
 
 Contributing
