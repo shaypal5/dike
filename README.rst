@@ -53,13 +53,13 @@ Use
 Configuring dike
 =================
 
-Configuration directories
--------------------------
+Configure ``dike`` by populating the ``~/.config/dike/cfg.json`` file with the follosing possible configuration key-value pairs:
 
-By default ``dike`` looks for files only in the ``~/.config/<namespace>`` and ``~/.<namespace>`` directories. You can set a different set of directories to read by populating the ``directories`` constructor parameter with a different directory path, or a list of paths.
+.. code-block:: python
 
-Similarly, be default ``dike`` reads into the configuration tree only the first compliant file encountered during a lookup in all pre-configured directories; to instead load hierarchical configurations from all such files instead, the ``load_all`` constructor parameter can be set to ``True``. Again, load order is undefined, and thus so is the resulting hierarchical configuration.
-
+  {
+      "datadir": "/home/myuser/data/"  # directory where data and embedding files are downloaded to
+  }
 
 
 
