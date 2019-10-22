@@ -45,6 +45,6 @@ def corpus_file_to_vocab_counter(fpath, sep=None):
     """
     with open(fpath, 'rt') as f:
         return string_iter_to_vocab_counter(
-            slist=f,
+            slist=(line[:-1] for line in f),
             sep=sep,
         )

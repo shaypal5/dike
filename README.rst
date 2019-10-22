@@ -67,6 +67,15 @@ Corresponding environment variables which can be used for configuration:
 
 
 
+Supported embeddings
+====================
+
+gensim
+------
+
+* `word2vec-google-news-300 <https://github.com/RaRe-Technologies/gensim-data/releases/tag/word2vec-google-news-300>`_ - Pre-trained vectors trained on a part of the Google News dataset (about 100 billion words). The model contain 300-dimensional vectors for 3 million words and phrases. Size: 1.6GB.
+
+
 Contributing
 ============
 
