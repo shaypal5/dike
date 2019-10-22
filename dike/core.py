@@ -24,5 +24,6 @@ def _vocab_pair_intersect_test(ref_vocab, sec_vocab):
     return len(inter) / len(ref_vocab)
 
 
+
 def vocab_intersect_test(df):
     pass
