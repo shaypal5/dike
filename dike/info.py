@@ -2,10 +2,22 @@
 
 # flake8: noqa
 
+import os
 
-class Embedding:
-    def __init__(self, **kwds):
-        self.__init____dict__.update(kwds)
+from munch import Munch
+
+from .cfg import CFG
+
+
+class Embedding(Munch):
+
+    @property
+    def fname(self):
+        return self.name + '.gz'
+
+    @property
+    def fpath(self):
+        return os.path.join(CFG['datadir'], self.fname)
 
 
 THOUSAND = 1000
@@ -13,6 +25,7 @@ MILLION = 1000 * THOUSAND
 BILLION = 1000 * MILLION
 
 word2vec_google_news_300 = Embedding(
+    name='word2vec_google_news_300',
     link='https://github.com/RaRe-Technologies/gensim-data/releases/tag/word2vec-google-news-300',
     dlink='https://github.com/RaRe-Technologies/gensim-data/releases/download/word2vec-google-news-300/word2vec-google-news-300.gz',
     mbsize=1600,
@@ -23,6 +36,7 @@ word2vec_google_news_300 = Embedding(
 
 
 glove_twitter_200 = Embedding(
+    name='glove_twitter_200',
     link='https://github.com/RaRe-Technologies/gensim-data/releases/tag/glove-twitter-200',
     dlink='https://github.com/RaRe-Technologies/gensim-data/releases/download/glove-twitter-200/glove-twitter-200.gz',
     mbsize=759,
@@ -33,8 +47,9 @@ glove_twitter_200 = Embedding(
 
 
 glove_twitter_100 = Embedding(
+    name='glove_twitter_100',
     link='https://github.com/RaRe-Technologies/gensim-data/releases/tag/glove-twitter-100',
-    dlink='https://github.com/RaRe-Technologies/gensim-data/releases/download/glove-twitter-100/glove-twitter-100.gz'
+    dlink='https://github.com/RaRe-Technologies/gensim-data/releases/download/glove-twitter-100/glove-twitter-100.gz',
     mbsize=387,
     dimension=100,
     vocabsize=1193514,
@@ -43,8 +58,9 @@ glove_twitter_100 = Embedding(
 
 
 glove_twitter_50 = Embedding(
+    name='glove_twitter_50',
     link='https://github.com/RaRe-Technologies/gensim-data/releases/tag/glove-twitter-50',
-    dlink='https://github.com/RaRe-Technologies/gensim-data/releases/download/glove-twitter-50/glove-twitter-50.gz'
+    dlink='https://github.com/RaRe-Technologies/gensim-data/releases/download/glove-twitter-50/glove-twitter-50.gz',
     mbsize=200,
     dimension=50,
     vocabsize=1193514,
@@ -53,8 +69,9 @@ glove_twitter_50 = Embedding(
 
 
 glove_twitter_25 = Embedding(
+    name='glove_twitter_25',
     link='https://github.com/RaRe-Technologies/gensim-data/releases/tag/glove-twitter-25',
-    dlink='https://github.com/RaRe-Technologies/gensim-data/releases/download/glove-twitter-50/glove-twitter-25.gz'
+    dlink='https://github.com/RaRe-Technologies/gensim-data/releases/download/glove-twitter-25/glove-twitter-25.gz',
     mbsize=105,
     dimension=25,
     vocabsize=1193514,
@@ -63,6 +80,7 @@ glove_twitter_25 = Embedding(
 
 
 glove_wiki_gigaword_300 = Embedding(
+    name='glove_wiki_gigaword_300',
     link='https://github.com/RaRe-Technologies/gensim-data/releases/tag/glove-wiki-gigaword-300',
     dlink='https://github.com/RaRe-Technologies/gensim-data/releases/download/glove-wiki-gigaword-300/glove-wiki-gigaword-300.gz',
     mbsize=376,
@@ -73,6 +91,7 @@ glove_wiki_gigaword_300 = Embedding(
 
 
 glove_wiki_gigaword_200 = Embedding(
+    name='glove_wiki_gigaword_200',
     link='https://github.com/RaRe-Technologies/gensim-data/releases/tag/glove-wiki-gigaword-200',
     dlink='https://github.com/RaRe-Technologies/gensim-data/releases/download/glove-wiki-gigaword-200/glove-wiki-gigaword-200.gz',
     mbsize=252,
@@ -83,6 +102,7 @@ glove_wiki_gigaword_200 = Embedding(
 
 
 glove_wiki_gigaword_100 = Embedding(
+    name='glove_wiki_gigaword_100',
     link='https://github.com/RaRe-Technologies/gensim-data/releases/tag/glove-wiki-gigaword-100',
     dlink='https://github.com/RaRe-Technologies/gensim-data/releases/download/glove-wiki-gigaword-100/glove-wiki-gigaword-100.gz',
     mbsize=128,
@@ -90,7 +110,6 @@ glove_wiki_gigaword_100 = Embedding(
     vocabsize=400 * THOUSAND,
     tokens=5.6 * BILLION,
 )
-
 
 
 EMBEDDINGS = [
@@ -103,3 +122,7 @@ EMBEDDINGS = [
     glove_wiki_gigaword_200,
     glove_wiki_gigaword_100,
 ]
+
+
+for e in EMBEDDINGS:
+    setattr(Embedding, e.name, e)

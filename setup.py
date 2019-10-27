@@ -7,7 +7,7 @@ import setuptools
 import versioneer
 
 
-INSTALL_REQUIRES = ['birch>=0.0.17']
+INSTALL_REQUIRES = ['birch>=0.0.17', 'munch', 'wget', 'tqdm']
 TEST_REQUIRES = [
     # testing and coverage
     'pytest', 'coverage', 'pytest-cov',

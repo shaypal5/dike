@@ -2,6 +2,10 @@
 
 from collections import Counter
 
+from tqdl import download
+
+# from .cfg import CFG
+
 
 def string_iter_to_vocab_counter(slist, sep=None):
     """Converts an iterable-of-strings corpus to a vocabulary counter.
@@ -48,3 +52,11 @@ def corpus_file_to_vocab_counter(fpath, sep=None):
             slist=(line[:-1] for line in f),
             sep=sep,
         )
+
+
+# Embedding files
+
+def download_embedding(embedding):
+    print("Downloading {} embedding to {}:".format(
+        embedding.fname, embedding.fpath))
+    download(embedding.dlink, embedding.fpath)
