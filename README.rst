@@ -75,13 +75,19 @@ gensim
 
 * `word2vec-google-news-300 <https://github.com/RaRe-Technologies/gensim-data/releases/tag/word2vec-google-news-300>`_ - Pre-trained vectors trained on a part of the Google News dataset (about 100 billion words). The model contains 300-dimensional vectors for 3 million words and phrases. Size: 1.6GB.
 
-* `glove-twitter-200 <https://github.com/RaRe-Technologies/gensim-data/releases/tag/glove-twitter-200>`_ - Pre-trained glove vectors based on 2B tweets, 27B tokens, 1.2M vocab, uncased. Size: 759MB.
+* `glove-twitter-200 <https://github.com/RaRe-Technologies/gensim-data/releases/tag/glove-twitter-200>`_ - Pre-trained 200-dimensinal glove vectors based on 2B tweets, 27B tokens, 1.2M vocab, uncased. Size: 759MB.
 
-* `glove-wiki-gigaword-300 <https://github.com/RaRe-Technologies/gensim-data/releases/tag/glove-wiki-gigaword-300>`_ - Pre-trained glove vectors based on Wikipedia 2014 + Gigaword, 5.6B tokens, uncased. Size: 376MB.
+* `glove-twitter-100 <https://github.com/RaRe-Technologies/gensim-data/releases/tag/glove-twitter-100>`_ - Pre-trained 100-dimensional glove vectors based on 2B tweets, 27B tokens, 1.2M vocab, uncased. Size: 387MB.
 
-* `glove-wiki-gigaword-200 <https://github.com/RaRe-Technologies/gensim-data/releases/tag/glove-wiki-gigaword-200>`_ - Pre-trained glove vectors based on Wikipedia 2014 + Gigaword, 5.6B tokens, uncased. Size: 252MB.
+* `glove-twitter-50 <https://github.com/RaRe-Technologies/gensim-data/releases/tag/glove-twitter-50>`_ - Pre-trained 50-dimensional glove vectors based on 2B tweets, 27B tokens, 1.2M vocab, uncased. Size: 200MB.
 
-* `glove-wiki-gigaword-100 <https://github.com/RaRe-Technologies/gensim-data/releases/tag/glove-wiki-gigaword-100>`_ - Pre-trained glove vectors based on Wikipedia 2014 + Gigaword, 5.6B tokens, uncased. Size: 128MB.
+* `glove-twitter-25 <https://github.com/RaRe-Technologies/gensim-data/releases/tag/glove-twitter-25>`_ - Pre-trained 25-dimensional glove vectors based on 2B tweets, 27B tokens, 1.2M vocab, uncased. Size: 105MB.
+
+* `glove-wiki-gigaword-300 <https://github.com/RaRe-Technologies/gensim-data/releases/tag/glove-wiki-gigaword-300>`_ - Pre-trained 300-dimensional glove vectors based on Wikipedia 2014 + Gigaword, 5.6B tokens, uncased. Size: 376MB.
+
+* `glove-wiki-gigaword-200 <https://github.com/RaRe-Technologies/gensim-data/releases/tag/glove-wiki-gigaword-200>`_ - Pre-trained 200-dimensional glove vectors based on Wikipedia 2014 + Gigaword, 5.6B tokens, uncased. Size: 252MB.
+
+* `glove-wiki-gigaword-100 <https://github.com/RaRe-Technologies/gensim-data/releases/tag/glove-wiki-gigaword-100>`_ - Pre-trained 100-dimensional glove vectors based on Wikipedia 2014 + Gigaword, 5.6B tokens, uncased. Size: 128MB.
 
 
 Contributing

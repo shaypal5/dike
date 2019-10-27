@@ -27,7 +27,27 @@ glove_twitter_200 = Embedding(
     dlink='https://github.com/RaRe-Technologies/gensim-data/releases/download/glove-twitter-200/glove-twitter-200.gz',
     mbsize=759,
     dimension=200,
-    vocabsize=1.2 * MILLION,
+    vocabsize=1193514,
+    tokens=27 * BILLION,
+)
+
+
+glove_twitter_100 = Embedding(
+    link='https://github.com/RaRe-Technologies/gensim-data/releases/tag/glove-twitter-100',
+    dlink='https://github.com/RaRe-Technologies/gensim-data/releases/download/glove-twitter-100/glove-twitter-100.gz'
+    mbsize=387,
+    dimension=100,
+    vocabsize=1193514,
+    tokens=27 * BILLION,
+)
+
+
+glove_twitter_50 = Embedding(
+    link='https://github.com/RaRe-Technologies/gensim-data/releases/tag/glove-twitter-50',
+    dlink='https://github.com/RaRe-Technologies/gensim-data/releases/download/glove-twitter-50/glove-twitter-50.gz'
+    mbsize=200,
+    dimension=50,
+    vocabsize=1193514,
     tokens=27 * BILLION,
 )
 
@@ -66,5 +86,9 @@ glove_wiki_gigaword_100 = Embedding(
 EMBEDDINGS = [
     word2vec_google_news_300,
     glove_twitter_200,
+    glove_twitter_100,
+    glove_twitter_50,
     glove_wiki_gigaword_300,
+    glove_wiki_gigaword_200,
+    glove_wiki_gigaword_100,
 ]
