@@ -60,3 +60,7 @@ def download_embedding(embedding):
     print("Downloading {} embedding to {}:".format(
         embedding.fname, embedding.fpath))
     download(embedding.dlink, embedding.fpath)
+
+
+def dump_vocab_to_txt(vocab_dict):
+    for
