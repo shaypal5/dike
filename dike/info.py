@@ -19,6 +19,10 @@ class Embedding(Munch):
     def fpath(self):
         return os.path.join(CFG['datadir'], self.fname)
 
+    @property
+    def vocab_fpath(self):
+        return os.path.join(CFG['datadir'], self.name + '_vocab.txt')
+
 
 THOUSAND = 1000
 MILLION = 1000 * THOUSAND
@@ -32,6 +36,7 @@ word2vec_google_news_300 = Embedding(
     dimension=300,
     vocabsize=3000000,
     tokens=100 * BILLION,
+    ftype='gensim',
 )
 
 
@@ -43,6 +48,7 @@ glove_twitter_200 = Embedding(
     dimension=200,
     vocabsize=1193514,
     tokens=27 * BILLION,
+    ftype='gensim',
 )
 
 
@@ -54,6 +60,7 @@ glove_twitter_100 = Embedding(
     dimension=100,
     vocabsize=1193514,
     tokens=27 * BILLION,
+    ftype='gensim',
 )
 
 
@@ -65,6 +72,7 @@ glove_twitter_50 = Embedding(
     dimension=50,
     vocabsize=1193514,
     tokens=27 * BILLION,
+    ftype='gensim',
 )
 
 
@@ -76,6 +84,7 @@ glove_twitter_25 = Embedding(
     dimension=25,
     vocabsize=1193514,
     tokens=27 * BILLION,
+    ftype='gensim',
 )
 
 
@@ -87,6 +96,7 @@ glove_wiki_gigaword_300 = Embedding(
     dimension=300,
     vocabsize=400 * THOUSAND,
     tokens=5.6 * BILLION,
+    ftype='gensim',
 )
 
 
@@ -98,6 +108,7 @@ glove_wiki_gigaword_200 = Embedding(
     dimension=200,
     vocabsize=400 * THOUSAND,
     tokens=5.6 * BILLION,
+    ftype='gensim',
 )
 
 
@@ -109,6 +120,7 @@ glove_wiki_gigaword_100 = Embedding(
     dimension=100,
     vocabsize=400 * THOUSAND,
     tokens=5.6 * BILLION,
+    ftype='gensim',
 )
 
 
