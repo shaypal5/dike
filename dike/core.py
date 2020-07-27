@@ -1,6 +1,7 @@
 """Core functionality for the dike package."""
 
 from .util import string_iter_to_vocab_counter
+from .info import EMBEDDINGS
 
 
 def _vocab_pair_intersect_test(ref_vocab, sec_vocab):
@@ -24,6 +25,10 @@ def _vocab_pair_intersect_test(ref_vocab, sec_vocab):
     return len(inter) / len(ref_vocab)
 
 
-
-def vocab_intersect_test(df):
+def vocab_intersect_test(text):
     pass
+
+
+def select_embedding(texts):
+    for embedding in EMBEDDINGS:
+        pass

@@ -4,8 +4,6 @@ from collections import Counter
 
 from tqdl import download
 
-# from .cfg import CFG
-
 
 def string_iter_to_vocab_counter(slist, sep=None):
     """Converts an iterable-of-strings corpus to a vocabulary counter.
